@@ -1,0 +1,18 @@
+# Cypress folders and files
+cypress/videos
+cypress/screenshots
+cypress/results
+cypress/coverage
+cypress/fixtures/
+
+# Cypress logs
+cypress/.cache
+
+# Node modules
+node_modules
+
+# Test output
+test-output
+
+# Local environment files
+.env
