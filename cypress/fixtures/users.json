@@ -1,0 +1,15 @@
+{
+    "validUser": {
+        "email": "swathi.maanyam@dockyard.com",
+        "password": "cotton-chair-308"
+    },
+    "invalidUser": {
+        "email": "swathi.maanyam@dockyard.com",
+        "password": "cotton-chair"
+    },
+    "apiUser": {
+        "email": "eve.holt@reqres.in",
+        "password": "cityslicka"
+    }
+
+}
