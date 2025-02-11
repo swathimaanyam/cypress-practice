@@ -29,10 +29,8 @@ describe('login functionality', () => {
         cy.viewport('iphone-x');
         cy.intercept('GET', '**/users/log_in').as('x');
         cy.visit(Cypress.env('baseUrl')+ "/users/log_in")
-        loginPage.login(Cypress.env('email'),Cypress.env('password'))
-        
-        // cy.wait('@x').its(response.statusCode).should('eq',200); - not working
-        
+        loginPage.login(Cypress.env('email'),Cypress.env('password'))  
+        // cy.wait('@x').its(response.statusCode).should('eq',200); - not working   
         cy.wait('@x').then((data) => {
             expect(data.response.statusCode).to.eq(200);
         });
