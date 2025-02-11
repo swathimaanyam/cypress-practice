@@ -25,20 +25,23 @@ jobs:
       - name: Verify Cypress Binary
         run: npx cypress install     
 
-      - name: Run Cypress Tests
-        run: npx cypress run
+      # - name: Run Cypress Tests
+      #   run: npx cypress run
+
+      - name: Run Cypress Tests in Headed Mode
+        run: npx cypress run --headed
 
       # Save Cypress screenshots and videos on failure
-    #   - name: Upload Cypress Screenshots (if tests fail)
-    #     if: failure()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: cypress-screenshots
-    #       path: cypress/screenshots/
+      - name: Upload Cypress Screenshots (if tests fail)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
 
-    #   - name: Upload Cypress Videos (if tests fail)
-    #     if: failure()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: cypress-videos
-    #       path: cypress/videos/
+      - name: Upload Cypress Videos (if tests fail)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos/
