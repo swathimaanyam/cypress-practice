@@ -11,8 +11,6 @@ cypress/.cache
 # Node modules
 node_modules
 
-# Test output
-test-output
-
 # Local environment files
-.env
+cypress.env.json
+
