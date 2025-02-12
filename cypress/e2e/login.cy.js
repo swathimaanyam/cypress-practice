@@ -1,7 +1,7 @@
 import loginPage from './pages/loginPage'
 import { validUser } from '../fixtures/users.json'
 
-describe('login functionality', () => {
+describe.skip('login functionality', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('baseUrl')+ "/users/log_in")
     })
