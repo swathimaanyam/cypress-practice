@@ -30,12 +30,12 @@ jobs:
               echo "CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }}" >> $GITHUB_ENV
               echo "CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}" >> $GITHUB_ENV
                   
-      # - name: Run Cypress Tests
+      # - name: Run Cypress Tests in headless mode
       #   run: npx cypress run
 
       - name: Run Cypress Tests in Headed Mode
         run: 
-           CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
+           npx cypress run --headed --env CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
  
       # Save Cypress screenshots and videos on failure
       - name: Upload Cypress Screenshots (if tests fail)
