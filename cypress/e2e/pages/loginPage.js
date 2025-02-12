@@ -6,8 +6,8 @@ class loginPage{
     }
 
     login(email,password){
-        this.elements.email().type(Cypress.env('CYPRESS_VALID_USERNAME'));
-        this.elements.password().type(Cypress.env('CYPRESS_VALID_PASSWORD'), {log : false});
+        this.elements.email().type(email);
+        this.elements.password().type((password), {log : false});
         this.elements.submitButton().click()
     }
 }
