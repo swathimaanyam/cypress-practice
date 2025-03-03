@@ -1,1 +1,14 @@
+# Cypress folders and files
+cypress/videos
+cypress/screenshots
+cypress/fixtures/
+
+# Cypress logs
+cypress/.cache
+
+# Node modules
+node_modules
+
+# Local environment files
 cypress.env.json
+
