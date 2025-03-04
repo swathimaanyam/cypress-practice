@@ -1,8 +1,6 @@
 # Cypress folders and files
 cypress/videos
 cypress/screenshots
-cypress/results
-cypress/coverage
 cypress/fixtures/
 
 # Cypress logs

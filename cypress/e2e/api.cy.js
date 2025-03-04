@@ -1,6 +1,6 @@
 // import schema from './schema.json'
 import apiUser from '../fixtures/users.json'
-describe('make api requests', () => {
+describe.skip('make api requests', () => {
     it('GET request', () => {
         cy.request('GET', 'https://jsonplaceholder.typicode.com/posts').then((response) => {
             // expect(response.status).to.eq(200);

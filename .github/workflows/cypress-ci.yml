@@ -22,20 +22,35 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Cypress Tests
-        run: npx cypress run
-
+      - name: Verify Cypress Binary
+        run: npx cypress install     
+      
+      - name: Set environment variables
+        run: |
+              echo "CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }}" >> $GITHUB_ENV
+              echo "CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}" >> $GITHUB_ENV
+              echo "CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}}" >> $GITHUB_ENV
+                  
+      - name: Run Cypress Tests in headless mode
+        run: 
+          npx cypress run --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
+       
+      - name: Run Cypress Tests in Headed Mode
+        run: 
+           npx cypress run --headed --env CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
+ 
       # Save Cypress screenshots and videos on failure
-    #   - name: Upload Cypress Screenshots (if tests fail)
-    #     if: failure()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: cypress-screenshots
-    #       path: cypress/screenshots/
+      - name: Upload Cypress Screenshots (if tests fail)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
 
-    #   - name: Upload Cypress Videos (if tests fail)
-    #     if: failure()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: cypress-videos
-    #       path: cypress/videos/
+      - name: Upload Cypress Videos (if tests fail)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos/
+
