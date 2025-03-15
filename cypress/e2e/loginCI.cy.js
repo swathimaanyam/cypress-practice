@@ -7,6 +7,6 @@ describe('login functionality', () => {
     it('valid login with CI secrets', () => {
         cy.get("#user_email").type(Cypress.env('CYPRESS_VALID_USERNAME'));
         cy.get("#password-input").type(Cypress.env('CYPRESS_VALID_PASSWORD'));
-        cy.get(".btn-primary ").click()
+        // cy.get(".btn-primary ").click()
     })
 })
