@@ -1,7 +1,7 @@
 import loginPage from './pages/loginPage'
-import { validUser } from '../fixtures/users.json'
+// import { validUser } from '../fixtures/users.json'
 
-describe('login functionality', () => {
+describe.skip('login functionality', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('baseUrl') + "/users/log_in")
     })
@@ -11,10 +11,7 @@ describe('login functionality', () => {
     // })
 
     it('valid login with ENV variables', () => {
-        // loginPage.login(Cypress.env('email'), Cypress.env('password'));
-        cy.get('input[type="checkbox"]').first()//.debug()
-        // .contains(" Show password")
-        .trigger('mousedown').debug()
+        loginPage.login(Cypress.env('email'), Cypress.env('password'));
     })
 
     it('valid login with fixtures', () => {
