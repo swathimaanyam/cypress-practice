@@ -19,6 +19,13 @@ describe('Cookie Handling Test - SauceDemo', () => {
       cy.getCookie('session-username') // Verify the specific session cookie - Visit dev tools-Applications-Cookies to check the cookie value
         .should('exist')
         .and('have.property', 'value', 'standard_user'); // Ensure correct user
+
+         // Refresh the page
+    cy.reload();
+
+    // Verify session is still maintained after refresh
+    cy.url().should('include', '/inventory.html');
+    cy.getCookie('session-username').should('exist');  
     });
   
     it('Should clear cookies after logout', () => {
