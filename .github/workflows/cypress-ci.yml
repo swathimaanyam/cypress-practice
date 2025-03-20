@@ -24,6 +24,9 @@ jobs:
 
       - name: Verify Cypress Binary
         run: npx cypress install     
+
+      - name: Install Mochawesome reporter
+        run: npm install --save-dev cypress-mochawesome-reporter mochawesome mochawesome-merge mochawesome-report-generator
       
       - name: Set environment variables
         run: |
@@ -33,14 +36,14 @@ jobs:
                   
       - name: Run Cypress Tests in headless mode
         run: 
-          npx cypress run --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
+          npx cypress run --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }} --reporter cypress-mochawesome-reporter
        
       - name: Install WebKit Dependencies
         run: npx playwright install-deps webkit
         
       - name: Run Cypress Tests in Safari bowser headless mode
         run: 
-          npx cypress run --browser webkit --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}
+          npx cypress run --browser webkit --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }} --reporter cypress-mochawesome-reporter
       
       - name: Run Cypress Tests in Headed Mode
         run: 
@@ -60,3 +63,18 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos/
+
+      # Generate test reports after run
+
+      - name: Generate Mochawesome report
+        run: |
+          mkdir -p ./cypress/reports/html
+          npx mochawesome-merge ./cypress/reports/mochawesome/*.json -o ./cypress/reports/mochawesome/mochawesome.json
+          npx marge ./cypress/reports/mochawesome/mochawesome.json --reportDir ./cypress/reports/html --overwrite --inline
+
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: mochawesome-report
+          path: ./cypress/reports/html

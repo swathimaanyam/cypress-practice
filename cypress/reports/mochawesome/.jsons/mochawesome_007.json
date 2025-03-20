@@ -1,0 +1,164 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 2,
+    "pending": 2,
+    "failures": -1,
+    "start": "2025-03-18T20:49:26.629Z",
+    "end": "2025-03-18T20:49:27.034Z",
+    "duration": 405,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 50,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "81170f38-fff8-4e48-b1d8-ffb1e0f27f5e",
+      "title": "",
+      "fullFile": "cypress/e2e/api.cy.js",
+      "file": "cypress/e2e/api.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "75465b22-3707-4a80-81a5-7d219157411e",
+          "title": "make api requests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "GET request",
+              "fullTitle": "make api requests GET request",
+              "timedOut": null,
+              "duration": 86,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('GET', 'https://jsonplaceholder.typicode.com/posts').then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.length).to.be.greaterThan(0);\n  expect(response.body[1].title).to.eq('qui est esse'); //VERIFY TITLE IS PRESENT IN ARRAY[1]\n  expect(response.body.some(verifyTitle => verifyTitle.title === 'qui est esse')).to.be.true; //VERIFY TITLE IS PRESENT SOMEWHERE IN THE BODY\n  cy.log('first 2', response.body.slice(0, 2));\n  // PRINTS TITLE TO CYPRESS RUNNER\n  response.body.slice(0, 2).forEach(element => {\n    cy.log(element.title);\n  });\n  // VERIFIES IF TTFB IS GOOD\n  if (response.duration < 100) {\n    cy.log('TTFB great');\n  } else {\n    cy.log('TFFB not great');\n  }\n  // cy.writeFile('cypress/fixtures/get.json', response.body) //WRITES THE DATA TO A  FIXTURE FILE\n  // expect(response.body).to.include('qui est esse'); // won't work because the response body is an array\n  // expect(response.body).to.be.jsonSchema(schema); // Need to pre-define schema and do npm install chai-json-schema \n});",
+              "err": {},
+              "uuid": "987eb5c8-4ee3-497a-a3fa-95bb19363525",
+              "parentUUID": "75465b22-3707-4a80-81a5-7d219157411e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST request with invalid credentials",
+              "fullTitle": "make api requests POST request with invalid credentials",
+              "timedOut": null,
+              "duration": 295,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: 'https://reqres.in/api/login',\n  body: {\n    email: 'test',\n    password: 'test'\n  },\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(400);\n});",
+              "err": {},
+              "uuid": "4da27ebd-2a8f-41f3-9b82-c17588b2a88e",
+              "parentUUID": "75465b22-3707-4a80-81a5-7d219157411e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST request with valid credentials",
+              "fullTitle": "make api requests POST request with valid credentials",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "cy.fixture('users.json').then(valid => {\n  cy.request({\n    method: 'POST',\n    url: 'https://reqres.in/api/login',\n    body: {\n      email: valid.apiUser.email,\n      password: valid.apiUser.password\n    }\n    // failOnStatusCode: false\n  }).then(response => {\n    expect(response.status).to.eq(200);\n  });\n});",
+              "err": {},
+              "uuid": "17643d7c-146f-4ae0-b9e3-56f83c6fd1ed",
+              "parentUUID": "75465b22-3707-4a80-81a5-7d219157411e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST request with masked valid credentials",
+              "fullTitle": "make api requests POST request with masked valid credentials",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "cy.fixture('users.json').then(valid => {\n  const maskemail = '****@***.com';\n  const maskpwd = '*****';\n  cy.request({\n    method: 'POST',\n    url: 'https://reqres.in/api/login',\n    body: {\n      email: valid.apiUser.email,\n      password: valid.apiUser.password\n    }\n  }).then(response => {\n    expect(response.status).to.eq(200);\n    console.log(maskemail + 'and' + maskpwd);\n  });\n});",
+              "err": {},
+              "uuid": "6dc0f64f-363b-44c1-ba26-af16bc8f2395",
+              "parentUUID": "75465b22-3707-4a80-81a5-7d219157411e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "987eb5c8-4ee3-497a-a3fa-95bb19363525",
+            "4da27ebd-2a8f-41f3-9b82-c17588b2a88e"
+          ],
+          "failures": [],
+          "pending": [
+            "17643d7c-146f-4ae0-b9e3-56f83c6fd1ed",
+            "6dc0f64f-363b-44c1-ba26-af16bc8f2395"
+          ],
+          "skipped": [],
+          "duration": 381,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome/.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "setupNodeEvents": "[Function setupNodeEvents]"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

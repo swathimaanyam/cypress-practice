@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-20T20:45:04.459Z",
+    "end": "2025-03-20T20:45:06.265Z",
+    "duration": 1806,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "88696ea5-697a-4fc7-a128-edb483813ba3",
+      "title": "",
+      "fullFile": "cypress/e2e/alerts_1.cy.js",
+      "file": "cypress/e2e/alerts_1.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "19c6b0d5-397e-424f-846b-9acdd8280b95",
+          "title": "Tests to handle the alerts",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test to handle a JavaScript alert",
+              "fullTitle": "Tests to handle the alerts Test to handle a JavaScript alert",
+              "timedOut": null,
+              "duration": 758,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://the-internet.herokuapp.com/javascript_alerts');\ncy.get('button[onclick=\"jsAlert()\"]').click(); // click alert btn\ncy.on('window:alert', alertText => {\n  expect(alertText).to.equal('I am a JS Alert'); // Validate alert boxtext\n});",
+              "err": {},
+              "uuid": "db369217-b04c-4a85-beda-ae5c32b68b1c",
+              "parentUUID": "19c6b0d5-397e-424f-846b-9acdd8280b95",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test to handle a JavaScript confirm box",
+              "fullTitle": "Tests to handle the alerts Test to handle a JavaScript confirm box",
+              "timedOut": null,
+              "duration": 197,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://the-internet.herokuapp.com/javascript_alerts');\ncy.get('button[onclick=\"jsConfirm()\"]').click();\ncy.on('window:confirm', confirmText => {\n  expect(confirmText).to.equal('I am a JS Confirm'); // Validate the confirmation alert text\n  return true; // Accept the confirm box\n});\ncy.get(\"#result\").should('have.text', \"You clicked: Ok\");",
+              "err": {},
+              "uuid": "a3609c52-577f-4036-8fae-c6e39362981f",
+              "parentUUID": "19c6b0d5-397e-424f-846b-9acdd8280b95",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "db369217-b04c-4a85-beda-ae5c32b68b1c",
+            "a3609c52-577f-4036-8fae-c6e39362981f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 955,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome/.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "setupNodeEvents": "[Function setupNodeEvents]"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

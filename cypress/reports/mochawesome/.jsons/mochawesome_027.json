@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-18T21:01:53.273Z",
+    "end": "2025-03-18T21:01:59.112Z",
+    "duration": 5839,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0cf5bbcf-370d-40a0-8e2a-2f06d8cfc787",
+      "title": "",
+      "fullFile": "cypress/e2e/crossSite.cy.js",
+      "file": "cypress/e2e/crossSite.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "52318b95-090c-47a9-b3ef-5d10b56ea1d3",
+          "title": "Amazon Search Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Searches for shoes on Amazon",
+              "fullTitle": "Amazon Search Test Searches for shoes on Amazon",
+              "timedOut": null,
+              "duration": 4520,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.amazon.com/\");\n// Type \"shoes\" in the search bar and submit\ncy.get(\"#twotabsearchtextbox\", {\n  timeout: 20000\n}).should(\"be.visible\").type(\"shoes{enter}\");\n// Verify search results are displayed\ncy.url().should(\"include\", \"k=shoes\"); // Verify that the search has the correct query params\ncy.get('[data-component-type=\"s-search-result\"]').should(\"be.visible\"); // Ensure search results appear\n// Continue to search results\ncy.get('[data-csa-c-content-id=\"|pill/1/1/1\"] > .a-spacing-micro > .a-list-item > .a-link-normal > .a-size-base') // Replace with the actual search results selector\n.should('be.visible').invoke('text').then(text => {\n  cy.log(\"Search Results Text: \" + text);\n});\n// cy.visit(\"https://www.myntra.com/\")\n//             cy.get(\"data-reactid='873'\").type(\"shoes\")\n// cy.origin(\"https://www.myntra.com\", { timeout: 20000 }, () => {\n//     cy.visit(\"/\", { timeout: 20000 });\n// })",
+              "err": {},
+              "uuid": "3c9ef4b3-8ee6-489d-83bd-ed1b8d065182",
+              "parentUUID": "52318b95-090c-47a9-b3ef-5d10b56ea1d3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3c9ef4b3-8ee6-489d-83bd-ed1b8d065182"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4520,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome/.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "setupNodeEvents": "[Function setupNodeEvents]"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

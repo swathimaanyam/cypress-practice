@@ -1,0 +1,110 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-03-18T21:00:29.142Z",
+    "end": "2025-03-18T21:00:50.872Z",
+    "duration": 21730,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e01d0894-47d0-46b6-95c1-46fc28e19859",
+      "title": "",
+      "fullFile": "cypress/e2e/crossSite.cy.js",
+      "file": "cypress/e2e/crossSite.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b3c4501d-2e45-49c0-a270-615a4da36dc7",
+          "title": "Amazon Search Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Searches for shoes on Amazon",
+              "fullTitle": "Amazon Search Test Searches for shoes on Amazon",
+              "timedOut": null,
+              "duration": 20696,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.amazon.com/\");\n// Type \"shoes\" in the search bar and submit\ncy.get(\"#twotabsearchtextbox\", {\n  timeout: 20000\n}).should(\"be.visible\").type(\"shoes{enter}\");\n// Verify search results are displayed\ncy.url().should(\"include\", \"k=shoes\"); // Verify that the search has the correct query params\ncy.get('[data-component-type=\"s-search-result\"]').should(\"be.visible\"); // Ensure search results appear\n// Continue to search results\ncy.get('[data-csa-c-content-id=\"|pill/1/1/1\"] > .a-spacing-micro > .a-list-item > .a-link-normal > .a-size-base') // Replace with the actual search results selector\n.should('be.visible').invoke('text').then(text => {\n  cy.log(\"Search Results Text: \" + text);\n});\n// cy.visit(\"https://www.myntra.com/\")\n//             cy.get(\"data-reactid='873'\").type(\"shoes\")\n// cy.origin(\"https://www.myntra.com\", { timeout: 20000 }, () => {\n//     cy.visit(\"/\", { timeout: 20000 });\n// })",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 20000ms: Expected to find element: `#twotabsearchtextbox`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 20000ms: Expected to find element: `#twotabsearchtextbox`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/crossSite.cy.js:27:59)",
+                "diff": null
+              },
+              "uuid": "a902d87a-c1f1-4a84-b1e8-dbcc2118a0cf",
+              "parentUUID": "b3c4501d-2e45-49c0-a270-615a4da36dc7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "a902d87a-c1f1-4a84-b1e8-dbcc2118a0cf"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 20696,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome/.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "setupNodeEvents": "[Function setupNodeEvents]"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

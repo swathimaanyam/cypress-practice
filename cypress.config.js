@@ -5,16 +5,22 @@ module.exports = defineConfig({
     baseUrl: process.env.CYPRESS_BASE_URL,
     video: true,
     experimentalWebKitSupport: true,
-
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-      on("task", {
-        log(message) {
-          console.log(message);
-          return null;
-        },
-      });
-    },
+    reporter: "cypress-mochawesome-reporter",
+    reporterOptions: {
+      reportDir: "cypress/reports/mochawesome",
+      overwrite: true,
+      html: true,
+      json: true,
+      setupNodeEvents(on, config) {
+        // implement node event listeners here
+        on("task", {
+          log(message) {
+            console.log(message);
+            return null;
+          },
+        });
+      },
+    }
   }
 })
 
