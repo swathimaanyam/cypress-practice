@@ -33,7 +33,17 @@ jobs:
               echo "CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }}" >> $GITHUB_ENV
               echo "CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }}" >> $GITHUB_ENV
               echo "CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}}" >> $GITHUB_ENV
-                  
+
+      # Generate test reports after run
+      - name: Generate Mochawesome report
+        run: |
+              mkdir -p ./cypress/e2e/reports/mochawesome
+              npx mochawesome-merge ./cypress/e2e/reports/mochawesome/*.json -o ./cypress/e2e/reports/mochawesome/mochawesome.json
+              npx marge ./cypress/e2e/reports/mochawesome/mochawesome.json --reportDir ./cypress/e2e/reports/html --overwrite --inline
+       
+      - name: List reports directory
+        run: ls -l ./cypress/e2e/reports/mochawesome/   
+
       - name: Run Cypress Tests in headless mode
         run: 
           npx cypress run --env CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL}},CYPRESS_VALID_USERNAME=${{ secrets.CYPRESS_VALID_USERNAME }},CYPRESS_VALID_PASSWORD=${{ secrets.CYPRESS_VALID_PASSWORD }} --reporter cypress-mochawesome-reporter
@@ -64,17 +74,8 @@ jobs:
           name: cypress-videos
           path: cypress/videos/
 
-      # Generate test reports after run
-
-      - name: Generate Mochawesome report
-        run: |
-          mkdir -p ./cypress/reports/html
-          npx mochawesome-merge ./cypress/reports/mochawesome/*.json -o ./cypress/reports/mochawesome/mochawesome.json
-          npx marge ./cypress/reports/mochawesome/mochawesome.json --reportDir ./cypress/reports/html --overwrite --inline
-
-
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-report
-          path: ./cypress/reports/html
+          path: ./cypress/e2e/reports/html

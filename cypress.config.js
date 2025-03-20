@@ -7,9 +7,9 @@ module.exports = defineConfig({
     experimentalWebKitSupport: true,
     reporter: "cypress-mochawesome-reporter",
     reporterOptions: {
-      reportDir: "cypress/reports/mochawesome",
-      overwrite: true,
-      html: true,
+      reportDir: "cypress/e2e/reports/mochawesome",
+      overwrite: false,
+      html: false,
       json: true,
       setupNodeEvents(on, config) {
         // implement node event listeners here
